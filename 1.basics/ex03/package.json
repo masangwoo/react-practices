@@ -1,7 +1,7 @@
 {
   "name": "ex03",
   "version": "1.0.0",
-  "description": "ex03: 애플리케이션1 : 애플리케이션",
+  "description": "",
   "type": "module",
   "main": "index.js",
   "scripts": {
