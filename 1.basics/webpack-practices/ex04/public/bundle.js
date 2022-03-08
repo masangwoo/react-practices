@@ -126,7 +126,7 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"App\": () => (/* binding */ App)\n/* harmony export */ });\n/* harmony import */ var _assets_css_App_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./assets/css/App.css */ \"./src/assets/css/App.css\");\n\r\n\r\nconst App = function() {\r\n    const App = document.createElement('h1');\r\n    App.className = 'Header';\r\n    App.textContent = 'Hello Webpack';\r\n    return App;\r\n}\r\n\n\n//# sourceURL=webpack://ex04/./src/App.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"App\": () => (/* binding */ App)\n/* harmony export */ });\n/* harmony import */ var _assets_css_App_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./assets/css/App.css */ \"./src/assets/css/App.css\");\n\n\nconst App = function() {\n    const App = document.createElement('h1');\n    App.className = 'Header';\n    App.textContent = 'Hello Webpack';\n    return App;\n}\n\n\n//# sourceURL=webpack://ex04/./src/App.js?");
 
 /***/ }),
 
@@ -136,7 +136,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _App_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.js */ \"./src/App.js\");\n// import './App.css';\r\n\r\n\r\ndocument\r\n    .getElementById('root')\r\n    .appendChild((0,_App_js__WEBPACK_IMPORTED_MODULE_0__.App)());\r\n\r\n\n\n//# sourceURL=webpack://ex04/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _App_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.js */ \"./src/App.js\");\n// import './App.css';\n\n\ndocument\n    .getElementById('root')\n    .appendChild((0,_App_js__WEBPACK_IMPORTED_MODULE_0__.App)());\n\n\n\n//# sourceURL=webpack://ex04/./src/index.js?");
 
 /***/ })
 

@@ -1,7 +1,7 @@
 {
   "name": "ex05",
   "version": "1.0.0",
-  "description": "",
+  "description": "SASS 모듈 번들링하기",
   "main": "index.js",
   "scripts": {
     "start": "npx webpack serve --progress",

@@ -14,5 +14,5 @@ ex04: 애플리케이션 번들링(bundling)
     $ npm i -D webpack webpack-cli
     $ npm .\node_modules\.bin\webpack --version
     $ npx webpack --version
-
+7. package.json scripting
   
