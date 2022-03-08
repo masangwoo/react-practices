@@ -10,6 +10,10 @@ module.exports = {
     },
     module: {
         rules:[{
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: ['babel-loader']
+        }, {
             test: /\.(sa|sc|c)ss$/i,
             use: ['style-loader', 'css-loader', 'sass-loader']
         }, {
@@ -23,6 +27,6 @@ module.exports = {
         liveReload: true,
         hot: false,
         compress: true,
-        historyApiFallback : true
+        historyApiFallback: true
     } 
 }

@@ -1,10 +1,16 @@
 import React from 'react';
 
 const App = function() {
-   // const App = document.createElement('h1');
-   // App.textContent = 'Hello World';
-   const App = React.createElement('h1', null, 'Hello World');
-   return App;
+    //const App = React.createElement('h1', null, 'Hello World');
+    //return App;
+    const message = 'Hello World111';
+    return (        
+        <div>
+            <h1>{message}</h1>
+        </div>
+    );
+
+    React.createElement('div', React.createElement('h1', null, 'helloworld'), null);
 }
 
 export { App }
