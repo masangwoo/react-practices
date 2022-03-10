@@ -1,18 +1,27 @@
 import React from 'react'
 
-const Clock01 = () => {
-   var hours = Date.prototype.getHours();
-   var minutes = Date.prototype.getMinutes();
-   var sec = Date.prototype.getSeconds();
-   var ampm = hours >= 12 ? 'pm' : 'am';
-   hours = hours % 12;
-   hours = hours ? hours : 12; // the hour '0' should be '12'
-   minutes = minutes < 10 ? '0'+minutes : minutes;
-   let strTime = ampm + hours + ':' + minutes + ':' + sec +' ';
+export const Clock01 = () => {
 
-    return (
-        <div>{strTime}</div>
-    );
+//     var time = new Date();
+
+//   return (
+//     <div>
+//         <p>{time.toLocaleString('ko-KR')}</p>
+//     </div>
+//   )
+
+const date = new Date();
+
+let hours = date.getHours();
+let session = 'AM';
+if(hours > 12){
+    session = 'PM';
 }
+const minutes = ('0'+date.getMinutes()).slice(-2);
+const seconds = ('0'+date.getSeconds()).slice(-2);
 
+return(
+    <div>{session} {hours} : {minutes} : {seconds}</div>
+)
+}
 export default Clock01
