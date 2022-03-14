@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import FoodList from "./FoodList";
 
-
 const App = function(){
-  const foods=[
-    {
+
+
+  const foods = [{
       no:1,
       name:"Bread",
       quantity: 40
@@ -17,14 +17,17 @@ const App = function(){
     },
     
     {
-      no:3,
+      no:1,
       name:"Egg",
       quantity: 10
     }];
+  
 
 
-  return(
-    <div>App</div>
+  return (
+    <div id="App">
+    <FoodList foods = {foods}/>
+  </div>
   )
 }
 
