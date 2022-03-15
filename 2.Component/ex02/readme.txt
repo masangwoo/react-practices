@@ -7,10 +7,12 @@ ex02 : Compnoent Styling(Working with UI)
   - $ npm run debug src=03 css-modules=true
 04. CSS Module (css-loader options:{module: true})
   - $ npm run debug src=04 css-modules=true
-05. SACC & SCSS
-06.
-07.
-08.
+05. SACC & SCSS(css-loader options:{module: true})
+  ----------------------------------------------------
+  CSS in JS(Style Component), Less & Styleable
+  ----------------------------------------------------
+06. Font Awesome : Working with UI I
+07. React Modal : Working with UI II
 
 1. 설치
   $ npm i -D webpack webpack-cli webpack-dev-server style-loader css-loader sass-loader @babel/core @babel/cli @babel/preset-env @babel/preset-react babel-loader
@@ -22,8 +24,8 @@ ex02 : Compnoent Styling(Working with UI)
 
 3. npm 스크립팅
  "scripts": {
-    "start": "npx webpack serve --progress --mode development --env",
-    "build": "npx webpack "
+    "debug": "npx webpack serve --config config/webpack.config.js --progress --mode development --env",
+    "build": "npx webpack"
   },
 
 4. 실행

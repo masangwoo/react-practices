@@ -1,13 +1,16 @@
-import React, { Component } from 'react';
+import React from "react";
+import KanbanBoard from "./KanbanBoard.js";
+import './assets/css/App.css'
 
-class App extends Component{
-  render(){
-    return(
-    <div>
-     kanbanboard
-    </div>
-    )
-  }
-}
+import "../public/styles.css";
+
+const App = () => {
+  const data = require("../public/data.json");
+
+  return (
+    <KanbanBoard />
+  );
+};
+
 
 export default App;
