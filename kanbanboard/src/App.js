@@ -1,16 +1,11 @@
-import React from "react";
-import KanbanBoard from "./KanbanBoard.js";
-import './assets/css/App.css'
-
-import "../public/styles.css";
+import React from 'react'
+import KanbanBoard from './KanbanBoard';
+import './assets/css/App.css';
 
 const App = () => {
-  const data = require("../public/data.json");
-
   return (
     <KanbanBoard />
-  );
-};
-
+  )
+}
 
 export default App;
