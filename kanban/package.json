@@ -1,11 +1,10 @@
 {
-  "name": "kanbanboard",
+  "name": "kanban",
   "version": "1.0.0",
-  "description": "",
-  "main": "webpack.config.js",
+  "main": "index.js",
   "scripts": {
-    "start": "npx webpack serve --progress",
-    "build": "npx webpack "
+    "debug": "npx webpack serve --config config/webpack.config.js --progress --mode development",
+    "build": "npx webpack"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +16,7 @@
     "@babel/preset-react": "^7.16.7",
     "babel-loader": "^8.2.3",
     "css-loader": "^6.7.1",
+    "node-sass": "^7.0.1",
     "sass-loader": "^12.6.0",
     "style-loader": "^3.3.1",
     "webpack": "^5.70.0",
@@ -26,5 +26,6 @@
   "dependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
-  }
+  },
+  "description": ""
 }

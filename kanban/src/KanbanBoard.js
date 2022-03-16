@@ -8,9 +8,9 @@ const KanbaBoard = () => {
     
   return (
     <div className={styles.KanbanBoard}>
-      <CardList title={'ToDo'} />
-      <CardList title={'Doing'} />
-      <CardList title={'Done'} />
+      <CardList title={'ToDo'} cards={} />
+      <CardList title={'Doing'} cards={}/>
+      <CardList title={'Done'} cards={}/>
     </div>
   )
 }
