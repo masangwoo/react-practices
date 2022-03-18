@@ -17,8 +17,7 @@ ul, ol {
 
 :global(#root) {
     width: 100%;
-
-    .App {
+    :global(.App) {
         width: 300px;
         margin: 5px auto 0 auto;
         background-color: #f2f2f2;

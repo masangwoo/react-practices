@@ -3,15 +3,15 @@ import './assets/scss/App.scss';
 import {RegisterForm} from './RegisterForm';
 import SearchBar from './SearchBar';
 import Emaillist from './Emaillist';
-import Email from './Email';
+import Data from './assets/json/data.json'
 
 const App = () => {
   return (
       <div className={'App'}>
         <RegisterForm/>
         <SearchBar />
-        <Emaillist />
-        <Email/>
+        <Emaillist emails={Data} />
+        
       </div>
     )
 }
