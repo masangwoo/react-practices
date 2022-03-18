@@ -4,52 +4,23 @@ import {faCheckCircle, faTimesCircle} from '@fortawesome/free-solid-svg-icons';
 import './assets/Form.css';
 
 export default function Form() {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [validEmail, setValidEmail] = useState(false); //ui용
-    const [gender, setGender] = useState('female');
-    const [birthYear, setBirthYear] = useState('1990');
-    const [description, setDescription] = useState("");
-    const [agreeProv, setAgreeProv] = useState("no");
+    const onSubmit = function(e){
+        e.preventDefault();
+        
+        //validation이 딱히 필요가 없으면....
+        console.log(e.target.email.value,":", e.target.password.value);
 
-
-    const onChangeInputName = function(e) {
-        // setName(e.target.value);
-        // 10자 제한
-        setName(e.target.value.substr(0, 10));
-    }
-
-    const onChangeInputEmail = function(e) {
-        setEmail(e.target.value);
-
-        const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g;
-        setValidEmail(re.test(e.target.value));
-
-       // if(re.test(e.target.value)){
-       //     setEmail(e.target.value);
-       // };
-    }
-
-    const onChangeInputGender = function(e){
-        setGender(e.target.value);
-    }
-
-    const onChangeAgreeProv = function(e) {
-        const status = e.target.value === 'no'? 'yes' : 'no';
-
-        //API 호출
-        //const url= `/prov/agree?status=${status}`;
-        //result = await fetch(url);
-        //console.log(url);
-        //if(true){
-        //    setAgreeProv(status);
-        //}
-        setAgreeProv(status);
+        //ajax 통신
     }
 
     return (
-        <form id="joinForm" name="joinForm" method="post" action="/do/not/post">
+        <form 
+            id="loginForm" 
+            name="loginForm" 
+            method="post" 
+            onSubmit={onSubmit}
+            action="/do/not/post">
+
             <label htmlFor="name">이름</label>
             <input 
                 id="name"
