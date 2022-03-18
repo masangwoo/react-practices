@@ -1,9 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styles from './assets/css/Card.css';
 import TaskList from './TaskList';
 
 
 const Card = ({title, description, tasks}) => {
+  //const[valid,set] useState();
 
   return (
     <div className={styles.Card}>
