@@ -19,14 +19,10 @@ module.exports = function(env) {
                 }
             }, {
                 test: /\.(sa|sc|c)ss$/i,
-                use: ['style-loader', 
-                {
-                   loader: 'css-loader',
-                   options: {
-                       modules: env['css-modules'] !== 'false'
-                   }
-                },
-                 'sass-loader']
+                use: [
+                    'style-loader',
+                    {loader: 'css-loader', options: {modules: env['css-modules'] !== 'false'}},
+                    'sass-loader']
             }, {
                 test: /\.(png|git|jpe?g|svg|ico|tiff?|bmp)$/i,
                 type: 'asset/resource'

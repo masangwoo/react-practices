@@ -2,7 +2,7 @@ import React from 'react'
 
 const FoodListItem = ({name, quantity}) => {
   return (
-    <li>{name} : {quantity}</li>
+    <li>{name }: {quantity}</li>
   )
 }
 

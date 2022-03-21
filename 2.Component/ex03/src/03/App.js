@@ -22,14 +22,12 @@ export default function App() {
                 name='addForm'
                 method='post'
                 action='/do/not/go'
-                onSubmit={onAddFormSubmit}
-                >
+                onSubmit={onAddFormSubmit}>
                 <input
                     type='text'
                     name='message'
                     placeholder='메세지를 입력 하세요'
-                    onChange={onChangeMessageInput}
-                    />
+                    onChange={onChangeMessageInput} />
                 <br/>
                 <br/>
                 <input

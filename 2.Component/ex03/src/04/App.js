@@ -5,24 +5,25 @@ export default function App() {
     const imgRef = useRef(null);
 
     const onKeyPressInput = e => {
-        if(e.key == 'Enter'){
+        if(e.key == 'Enter') {
             console.log(e.target.value);
         }
     }
 
     const onFocusInput = e => console.log('focused');
     const onBlurInput = e => console.log('blur');
-    const onMouseOverImage = e => console.log('mouseover',`x=${e.clientX},y=${e.clientY}`);
-    const onMouseOutImage = e => console.log('mouseout',`x=${e.clientX},y=${e.clientY}`);
+
+    const onMouseOverImage = e => console.log('mouseover', `x=${e.clientX}, y=${e.clientY}`);
+    const onMouseOutImage = e => console.log('mouseout', `x=${e.clientX}, y=${e.clientY}`);
     const onMouseMoveImage = e => {
         const offsetTop = imgRef.current.offsetTop;
         const offsetLeft = imgRef.current.offsetLeft;
-        console.log('mousemove',`x=${e.clientX - offsetLeft},y=${e.clientY - offsetTop}`)}
-
-    const onMouseDownImage = e => console.log('mousedown',`x=${e.clientX},y=${e.clientY}`);
-    const onMouseUpImage = e => console.log('mouseup',`x=${e.clientX},y=${e.clientY}`);
-    const onClickImage = e => console.log('click',`x=${e.clientX},y=${e.clientY}`);
-    const onDoubleClickImage = e => console.log('dblclick',`x=${e.clientX},y=${e.clientY}`);
+        console.log('mousemove', `x=${e.clientX-offsetLeft}, y=${e.clientY-offsetTop}`);
+    }
+    const onMouseDownImage = e => console.log('mousedown', `x=${e.clientX}, y=${e.clientY}`);
+    const onMouseUpImage = e => console.log('mouseup', `x=${e.clientX}, y=${e.clientY}`);
+    const onClickImage = e => console.log('click', `x=${e.clientX}, y=${e.clientY}`);
+    const onDoubleClickImage = e => console.log('dblclick', `x=${e.clientX}, y=${e.clientY}`);
 
     return (
         <Fragment>
@@ -31,9 +32,8 @@ export default function App() {
                 type='text'
                 placeholder='메세지를 입력 하세요'
                 onKeyPress={ onKeyPressInput }
-                onFocus={onFocusInput}
-                onBlur={onBlurInput}
-            />
+                onFocus={ onFocusInput }
+                onBlur={ onBlurInput } />
                 <br/>
                 <br/>
             <img
@@ -43,15 +43,14 @@ export default function App() {
                     width: 190,
                     border: '1px solid #ccc'
                 } }
-                src={ logo }
-                onMouseOver={onMouseOverImage}
-                onMouseOut={onMouseOutImage}
-                onMouseMove={onMouseMoveImage}
-                onMouseDown={onMouseDownImage}
-                onMouseUp={onMouseUpImage}
-                onClick={onClickImage}
-                onDoubleClick={onDoubleClickImage}
-                />
+                src={ logo } 
+                onMouseOver={ onMouseOverImage }
+                onMouseOut={ onMouseOutImage }
+                onMouseMove={ onMouseMoveImage } 
+                onMouseDown={ onMouseDownImage }
+                onMouseUp={ onMouseUpImage }
+                onClick={ onClickImage }
+                onDoubleClick={ onDoubleClickImage } />
         </Fragment>
     );
 }
