@@ -27,8 +27,16 @@ const App = () => {
       if(json.result !== 'success') {
         throw new Error(`${json.result} ${json.message}`);
       }
+
+      console.log(json.data);
+      const newEmails = [];
+      newEmails[0] = json.data;
+      for(var i = 0; i< emails.length; i++){
+        newEmails[i+1] = emails[i];
+      }
+
+      setEmails([json.data, ...emails]);
       
-      setEmails(json.data);
     } catch(err) {
       console.log(err);      
     }  
