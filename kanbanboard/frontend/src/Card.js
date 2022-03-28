@@ -1,24 +1,29 @@
 import React, {useState} from 'react'
-import styles from './assets/css/Card.css';
+import styles from './assets/scss/Card.scss';
 import TaskList from './TaskList';
 
-
 const Card = ({title, description, tasks}) => {
-  const[foldStatus,setFoldStatus] = useState(true);
-  const onChangeFold = function(e){
-    setFoldStatus(e => e?false:true);
-}
+  const [showDetails, setShowDetails] = useState(false);
+  
   return (
     <div className={styles.Card}>
-          <div className={foldStatus?styles['Card__Title--is-open']:styles.Card__Title }
-               value={foldStatus}
-               onClick={onChangeFold}>{title}</div>
-          <div className={styles.Card__Details}>
-            {foldStatus ? description : null}
-            {foldStatus ? <TaskList tasks={tasks}/> : null}
-          </div>
+        <div
+          className={showDetails ? [styles.Card__Title, styles.Card__Title__open].join(' ') : styles.Card__Title}
+          onClick={() => setShowDetails(!showDetails)}>
+          {title}
         </div>
+        {
+          showDetails ? 
+            <div className={styles.Card__Details}>
+              {description}
+              {
+                tasks? <TaskList tasks={tasks} /> : null
+              }
+            </div> :
+            null
+        }
+    </div>
   )
 }
 
-export default Card
+export default Card;
