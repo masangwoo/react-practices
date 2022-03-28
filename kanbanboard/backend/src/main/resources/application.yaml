@@ -26,8 +26,8 @@ spring:
 
    # datasource
    datasource:
-      driver-class-name: org.mariadb.jdbc.Driver
-      url: jdbc:mysql://192.168.0.51:3307/webdb?characterEncoding=utf8
+      driver-class-name: org.h2.Driver
+      url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;MODE=MYSQL
       username: webdb
       password: webdb
 
@@ -65,4 +65,4 @@ server:
 # logging
 logging:
    level:
-      root: WARN            
+      root: INFO            
