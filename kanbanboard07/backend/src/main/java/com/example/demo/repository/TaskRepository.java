@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.vo.CardVo;
+import com.example.demo.vo.TaskVo;
 
 @Repository
 public class TaskRepository {
@@ -14,8 +14,16 @@ public class TaskRepository {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public List<CardVo> findAll() {
-		return sqlSession.selectList("task.findAll");
+	public List<TaskVo> findAll(Long cardNo) {
+		return sqlSession.selectList("task.findAll", cardNo);
+	}
+	
+	public Boolean insert(TaskVo vo) {
+		return sqlSession.insert("task.insert", vo) == 1;
+	}
+	
+	public Boolean delete(Long no) {
+		return sqlSession.delete("task.delete", no) == 1;
 	}
 
 }

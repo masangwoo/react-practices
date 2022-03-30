@@ -3,7 +3,7 @@ import styles from './assets/scss/RegisterForm.scss';
 
 const RegisterForm = ({callback}) => {
   const refForm = useRef(null);
-  
+
   return (
     <form
       ref={refForm}
@@ -24,7 +24,7 @@ const RegisterForm = ({callback}) => {
             res[n] = v;
             return res;
           }, {});
-          
+
           refForm.current.reset();
           callback(newEmail);
         } catch(err) {

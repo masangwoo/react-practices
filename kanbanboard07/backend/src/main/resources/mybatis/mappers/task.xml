@@ -2,10 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="task">
 
-<select id="findAll" resultType="taskvo">
-				<![CDATA[ select * from task order by no desc ]]>
+	<select id="findAll" resultType="taskvo" parameterType="long">
+            <![CDATA[   
+                  select no, name, done, card_no
+                      from task
+                  where card_no = #{cardNo}
+              ]]>   
+   </select>
 
-	</select>
-
+	<insert id="insert" parameterType="taskvo">
+		<![CDATA[
+			insert	into task values (null, #{name}, #{done} , #{cardNo} )
+	  	]]>
+	</insert>
+	
+	<delete id="delete" parameterType="long">
+		<![CDATA[
+			delete from task where no = #{no}
+	  	]]>
+	</delete>
 	
 </mapper>

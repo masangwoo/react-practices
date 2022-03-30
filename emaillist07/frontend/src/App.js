@@ -68,6 +68,7 @@ const App = () => {
       console.log(err);      
     }     
   }
+  
 
   const notifyEmailAdd = function(email) {
     console.log('post /api', email);
