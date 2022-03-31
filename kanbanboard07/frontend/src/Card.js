@@ -1,112 +1,153 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react';
+import PropTypes from 'prop-types';
+import update from 'react-addons-update';
+import TaskList from "./TaskList";
+import Task from "./Task";
 import styles from './assets/scss/Card.scss';
-import TaskList from './TaskList';
 
-const Card = ({no, title, description}) => {
-  const [tasks, setTasks] = useState([]);
-  const [showDetails, setShowDetails] = useState(false);
+export default function Card({no, title, description, status}) {
+    const [showDetails, setShowDetails] = useState(false);
+    const [tasks, setTasks] = useState([]);
 
-  useEffect(async () => {
-    try {  
-      const response = await fetch(`/api/card/${no}`, {
-        method: 'get',
-        headers: {
-          'Accept': 'application/json'
+    const styleSideColor = {
+        position: 'absolute',
+        zIndex: -1,
+        top: 0,
+        bottom: 0,
+        left: 0,
+        width: 3,
+        backgroundColor: status === 'Doing' ? '#bd8D31' : (status === 'ToDo' ? '#3a7e28' : '#222')
+    };
+
+    const notifyChangeTaskDone = async (no, done) => {
+        try {
+            const response = await fetch(`/api/task/${no}`, {
+                method: 'put',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Accept': 'application/json'
+                },
+                body: `done=${done}`
+            });
+
+            if (!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`);
+            }
+
+            const json = await response.json();
+            if (json.result !== 'success') {
+                throw new Error(`${json.result} ${json.message}`);
+            }
+
+            const newTasks = update(tasks, {
+                [tasks.findIndex(task => task.no === json.data.no)]: {
+                    done: {
+                        $set: json.data.done
+                    }
+                }
+            });
+
+            setTasks(newTasks);
+
+        } catch (err) {
+            console.error(err);
         }
-      });
+    }
 
-      if(!response.ok) {
-        throw new Error(`${response.status} ${response.statusText}`);
-      }
+    const notifyAddTask = async (taskName) => {
+        try {
+            // console.log('notifyTaskAdd', cardNo, taskName);
+            const newTask = {
+                no: null,
+                name: taskName,
+                done: 'N',
+                cardNo: no
+            };
 
-      const json = await response.json();
+            const response = await fetch(`/api/task`, {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(newTask)
+            });
 
-      if(json.result !== 'success') {
-        throw new Error(`${json.result} ${json.message}`);
-      }
-      setTasks(json.data);
-    } catch(err) {
-      console.log(err);      
-    }  
-  }, [showDetails]);
-  
-  const notifyAddTask = async function(task) {
+            if (!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`);
+            }
 
-    try {  
-      const response = await fetch(`/api/card`, {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(task)
-      });
+            const json = await response.json();
+            if (json.result !== 'success') {
+                throw new Error(`${json.result} ${json.message}`);
+            }
 
-      if(!response.ok) {
-        throw new Error(`${response.status} ${response.statusText}`);
-      }
+            setTasks([json.data, ...tasks]);
 
-      const json = await response.json();
+        } catch (err) {
+            console.error(err);
+        }
+    }
 
-      if(json.result !== 'success') {
-        throw new Error(`${json.result} ${json.message}`);
-      }
-      
-      setTasks([json.data, ...tasks]);
-    } catch(err) {
-      console.log(err);      
-    }     
-  }
+    return (
+        <div className={styles.Card}>
+            <div style={styleSideColor}/>
+            <div
+                className={
+                    showDetails ?
+                        [styles.Card__Title, styles.Card__Title__open].join(' ') :
+                        styles.Card__Title
+                }
+                onClick={ async () => {
+                    if(!showDetails) {
+                        try {
+                            const response = await fetch(`/api/task?cardNo=${no}`, {
+                                method: 'get',
+                                headers: {
+                                    'Accept': 'application/json'
+                                }
+                            });
+                
+                            if (!response.ok) {
+                                throw new Error(`${response.status} ${response.statusText}`);
+                            }
+                
+                            const json = await response.json();
+                            if (json.result !== 'success') {
+                                throw new Error(`${json.result} ${json.message}`);
+                            }
+                
+                            setTasks(json.data);
 
-  const notifyDeleteTask = async function(taskno) {
-    try {  
-      const response = await fetch(`/api/card/${taskno}`, {
-        method: 'delete',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: null
-      });
+                        } catch (err) {
+                            console.log(err.message);
+                        }
+                    }
 
-      if(!response.ok) {
-        throw new Error(`${response.status} ${response.statusText}`);
-      }
-
-      const json = await response.json();
-
-      if(json.result !== 'success') {
-        throw new Error(`${json.result} ${json.message}`);
-      }
-      
-      setTasks(tasks.filter(t => t.no !== taskno));
-    } catch(err) {
-      console.log(err);      
-    }     
-  }
-
-  return (
-    <div className={styles.Card}>
-        <div
-          className={showDetails ? [styles.Card__Title, styles.Card__Title__open].join(' ') : styles.Card__Title}
-          onClick={() => {
-            console.log(`fecth task(/api/task?cardNo=${no}...)`);
-            
-            setShowDetails(!showDetails);
-          }}>
-          {title}
+                    setShowDetails(!showDetails);
+                }}>
+                {title}
+            </div>
+            {
+                showDetails ?
+                    <div className={styles.Card__Details}>
+                        {description}
+                        <TaskList
+                            cardNo={no}
+                            tasks={tasks}
+                            notifyAddTask={notifyAddTask}
+                            notifyChangeTaskDone={notifyChangeTaskDone}/>
+                    </div> :
+                    null
+            }
         </div>
-        {
-          showDetails ? 
-            <div className={styles.Card__Details}>
-              {description}
-              <TaskList no={no} tasks={tasks} addTask={notifyAddTask} deleteTask={notifyDeleteTask} />            
-              </div> 
-              :
-            null
-        }
-    </div>
-  )
+    );
 }
 
-export default Card;
+Card.propTypes = {
+    // title: PropTypes.string.isRequired,
+    title: (props, propName, componentName) => (!props[propName] || typeof props[propName] !== 'string' || props[propName].length > 50) ? new Error(`${propName} in ${componentName} is longer than 50 characters`) : null,
+    description: PropTypes.string,
+    status: PropTypes.string.isRequired,
+    tasks: PropTypes.arrayOf(PropTypes.shape(Task.propTypes))
+}

@@ -1,12 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import CardList from './CardList';
-import styles from './assets/css/KanbanBoard.css';
+import styles from './assets/css/KanbaBoard.css';
 
 const KanbanBoard = () => {
   const [cards, setCards] = useState([]);
 
   useEffect(async () => {
-    console.log('api');
     try {  
       const response = await fetch('/api/card', {
         method: 'get',

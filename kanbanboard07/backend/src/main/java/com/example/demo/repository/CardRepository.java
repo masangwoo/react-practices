@@ -10,12 +10,10 @@ import com.example.demo.vo.CardVo;
 
 @Repository
 public class CardRepository {
-	
 	@Autowired
 	private SqlSession sqlSession;
 	
 	public List<CardVo> findAll() {
 		return sqlSession.selectList("card.findAll");
 	}
-
 }

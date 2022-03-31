@@ -1,12 +1,14 @@
 package com.example.demo.controller;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,11 +24,10 @@ public class ApiController {
 	
 	@Autowired
 	private CardRepository cardRepository;
-	
+
 	@Autowired
 	private TaskRepository taskRepository;
 
-	
 	@GetMapping("/card")
 	public ResponseEntity<JsonResult> readCard() {
 		return ResponseEntity
@@ -34,27 +35,33 @@ public class ApiController {
 				.body(JsonResult.success(cardRepository.findAll()));
 	}
 	
-	@GetMapping("/card/{cardNo}")
-	public ResponseEntity<JsonResult> readTask(@PathVariable(value="cardNo") Long cardNo) {
+	@GetMapping("/task")
+	public ResponseEntity<JsonResult> readTask(Long cardNo) {
 		return ResponseEntity
 				.status(HttpStatus.OK)
-				.body(JsonResult.success(taskRepository.findAll(cardNo)));
+				.body(JsonResult.success(taskRepository.findAllByCardNo(cardNo)));
 	}
 
-	@DeleteMapping("/card/{no}")
-	public ResponseEntity<JsonResult> deleteTask(@PathVariable(value="no") Long no) {
+	@PostMapping("/task")
+	public ResponseEntity<JsonResult> createTask(@RequestBody TaskVo taskVo) {
+		taskRepository.insert(taskVo);
+		
 		return ResponseEntity
 				.status(HttpStatus.OK)
-				.body(JsonResult.success(taskRepository.delete(no)));
+				.body(JsonResult.success(taskVo));
 	}
-	
-	@PostMapping("/card")
-	public ResponseEntity<JsonResult> create(@RequestBody TaskVo vo) {
-		taskRepository.insert(vo);
+
+	@SuppressWarnings("serial")
+	@PutMapping("/task/{no}")
+	public ResponseEntity<JsonResult> updateTask(@PathVariable("no") Long no, String done) {
+		taskRepository.updateDone(no, done);
+		
 		return ResponseEntity
 				.status(HttpStatus.OK)
-				.body(JsonResult.success(vo));
+				.body(JsonResult.success(new HashMap<String, Object>() {{
+				    put("no", no);
+				    put("done", done);
+				}}));
 	}
-	
 
 }

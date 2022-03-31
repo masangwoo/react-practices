@@ -1,30 +1,22 @@
-import React, {useState} from 'react'
-import styles from './assets/css/Task.css';
+import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './assets/css/Task.css';
 
-
-const Task = ({no, name, done, deleteTask}) => {
-  const [stateDone, setStateDone] = useState(done);
-
-  return (
-    <li className={styles.TaskList__Task}>
-        <input
-          type='checkbox'
-          checked={done === 'Y'}
-          onClick={e => setStateDone(!stateDone)} />
-        {name}
-        <a href='#' 
-           className={styles.TaskList__Task__remove}
-           onClick={()=>
-             deleteTask(no)
-            }></a>
-    </li>
-  );
+export default function Task({no, name, done, notifyChangeTaskDone}) {
+    return (
+        <li className={styles.Task}>
+            <input 
+                type='checkbox' 
+                checked={done === 'Y'}
+                onChange={e => {
+                    notifyChangeTaskDone(no, e.target.checked ? 'Y' : 'N');
+                }}/>
+            {name}
+            <a href='#' className={styles.TaskList__Task__remove}/>
+        </li>
+    );
 }
 
-Task.propType = {
-  name: PropTypes.string.isRequired,
-  done: PropTypes.string.isRequired
+Task.propTypes = {
+    name: PropTypes.string.isRequired
 }
-
-export default Task;
