@@ -2,6 +2,9 @@ import React from 'react';
 import SiteLayout from "../../layout/SiteLayout";
 
 export default function Gallery() {
+    /*
+    window.location.href='/';
+    /*/
     return (
         <SiteLayout>
             <div>
@@ -12,4 +15,5 @@ export default function Gallery() {
             </div>
         </SiteLayout>
     );
+    //*/
 }
