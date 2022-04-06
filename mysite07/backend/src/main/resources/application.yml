@@ -17,7 +17,7 @@ spring:
    web:
       resources:
          # locations of static resources
-         static-locations: classpath:/static/, file:C:/mysite-uploads/
+         static-locations: classpath:/assets/, file:C:/mysite-uploads/
          
    # template engine: thymeleaf    
    thymeleaf:
